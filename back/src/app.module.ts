@@ -26,6 +26,8 @@ import { CredentialModule } from './credential/credential.module';
 import { User } from './entities/user.entity';
 import { Credential } from './entities/credential.entity';
 import { Category } from './entities/category.entity';
+import { CartModule } from './cart/cart.module';
+import { CartDetailModule } from './cart_detail/cart_detail.module';
 
 @Module({
   imports: [
@@ -71,6 +73,7 @@ import { Category } from './entities/category.entity';
     AuthModule,
     UserModule,
     CredentialModule,
+    CartDetailModule,
   ],
   controllers: [AppController],
   providers: [AppService, InitialDataLoader],
