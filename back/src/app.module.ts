@@ -21,11 +21,15 @@ import { CartModule } from './cart/cart.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { CredentialModule } from './credential/credential.module';
+import { CredentialNoSpecController } from './credential--no-spec/credential--no-spec.controller';
+import { CredentialModule } from './credential/credential.module';
 
 //Entidades usadas por la precarga
 import { User } from './entities/user.entity';
 import { Credential } from './entities/credential.entity';
 import { Category } from './entities/category.entity';
+import { UserController } from './user/user.controller';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -72,7 +76,7 @@ import { Category } from './entities/category.entity';
     UserModule,
     CredentialModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, UserController, CredentialNoSpecController],
   providers: [AppService, InitialDataLoader],
 })
 export class AppModule {}
