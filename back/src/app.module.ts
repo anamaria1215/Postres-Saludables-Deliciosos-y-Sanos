@@ -26,6 +26,8 @@ import { CredentialModule } from './credential/credential.module';
 import { User } from './entities/user.entity';
 import { Credential } from './entities/credential.entity';
 import { Category } from './entities/category.entity';
+import { UserController } from './user/user.controller';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -72,7 +74,7 @@ import { Category } from './entities/category.entity';
     UserModule,
     CredentialModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, UserController],
   providers: [AppService, InitialDataLoader],
 })
 export class AppModule {}
