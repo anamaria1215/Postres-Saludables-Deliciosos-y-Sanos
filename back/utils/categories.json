@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Tortas y pasteles",
+    "description": "Deliciosas opciones elaboradas con ingredientes naturales, endulzadas de forma saludable y perfectas para cualquier ocasión."
+  },
+  {
+    "name": "Galletas y snacks",
+    "description": "Pequeños bocados nutritivos, ideales para acompañar tus momentos de descanso o disfrutar entre comidas sin culpa."
+  },
+  {
+    "name": "Postres fríos",
+    "description": "Refrescantes y ligeros, preparados con frutas frescas y alternativas naturales al azúcar."
+  },
+  {
+    "name": "Barras y bocadillos energéticos",
+    "description": "Fuentes prácticas de energía y sabor, hechas con cereales integrales, frutos secos y endulzantes naturales."
+  }
+]

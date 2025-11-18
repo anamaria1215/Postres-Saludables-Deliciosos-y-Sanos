@@ -1,0 +1,223 @@
+{
+  "admins": [
+        {
+            "name": "Ana María",
+            "lastName": "Vargas Mejía",
+            "email": "anavargas@gmail.com",
+            "phoneNumber": "3012345678",
+            "address": "Calle 31 # 60 A 34",
+            "birthDay": "2002-06-30",
+            "credential": [
+                {
+                    "username": "ana_7",
+                    "password": "Ana123456@",
+                    "role": "Admin"
+            }
+        ]
+        },
+        {
+            "name": "Angie Tatiana",
+            "lastName": "Alba Amado",
+            "email": "angie.alba@gmail.com",
+            "phoneNumber": "3009876543",
+            "address": "Carrera 42 # 15-28, Bogotá",
+            "birthDay": "1997-05-22",
+            "credential": [
+                {
+                    "username": "angie_ta",
+                    "password": "Angie1234567@",
+                    "role": "Admin"
+                }
+            ]
+        },
+        {
+            "name": "Norida Elena",
+            "lastName": "Rueda Peña",
+            "email": "norida.rueda@gmail.com",
+            "phoneNumber": "3129988775",
+            "address": "Calle 60 # 33-12, Bucaramanga",
+            "birthDay": "1989-10-09",
+            "credential": [
+                {
+                    "username": "norida_rp",
+                    "password": "Norida1234567@",
+                    "role": "Admin"
+                }
+            ]
+        },
+        {
+            "name": "Mónica",
+            "lastName": "López Bedoya",
+            "email": "monica.lopezb@gmail.com",
+            "phoneNumber": "3105566778",
+            "address": "Transversal 25 # 45-33, Medellín",
+            "birthDay": "1995-03-18",
+            "credential": [
+                {
+                    "username": "moni_lb",
+                    "password": "Monica1234567@",
+                    "role": "Admin"
+                }
+            ]
+        },
+        {
+            "name": "Anellis Nicols",
+            "lastName": "Duarte Calderón",
+            "email": "anellis.duarte@gmail.com",
+            "phoneNumber": "3012233445",
+            "address": "Carrera 10 # 22-56, Cali",
+            "birthDay": "1998-12-07",
+            "credential": [
+                {
+                    "username": "anellis_dc",
+                    "password": "Anellis1234567@",
+                    "role": "Admin"
+                }
+            ]
+        }
+    ],
+    
+    "users": [
+        {
+            "name": "Ramón",
+            "lastName": "Suárez Tobón",
+            "email": "rsuarez@gmail.com",
+            "phoneNumber": "3000123487",
+            "address": "Carrera 45 # 20-10, Envigado",
+            "birthDay": "1994-09-12",
+            "credential": [
+                {
+                    "username": "ramon94",
+                    "password": "Ramoncito1234567@"
+                }
+            ]
+        },
+        {
+            "name": "Laura Marcela",
+            "lastName": "Castaño Rojas",
+            "email": "laura.castano99@gmail.com",
+            "phoneNumber": "3021122334",
+            "address": "Calle 50 # 72-11, Bello",
+            "birthDay": "1999-11-09",
+            "credential": [
+                {
+                    "username": "lalalalita",
+                    "password": "Lalita1234567@"
+                }
+            ]
+        },
+        {
+            "name": "Felipe",
+            "lastName": "Ramírez González",
+            "email": "felipe.ramirez95@hotmail.com",
+            "phoneNumber": "3045566778",
+            "address": "Carrera 60 # 33-80, Bogotá",
+            "birthDay": "1995-12-02",
+            "credential": [
+                {
+                    "username": "pipezzZ",
+                    "password": "Pipe1234567@"
+                }
+            ]
+        },
+        {
+            "name": "Valentina",
+            "lastName": "Zapata Montoya",
+            "email": "valentina.zm01@gmail.com",
+            "phoneNumber": "3119988776",
+            "address": "Transversal 32 # 45-19, Itagüí",
+            "birthDay": "2001-12-12",
+            "credential": [
+                {
+                    "username": "ValentinaZM",
+                    "password": "vzm1234567@"
+                }
+            ]
+        },
+        {
+            "name": "Santiago David",
+            "lastName": "Jiménez Arango",
+            "email": "santiago.ja97@gmail.com",
+            "phoneNumber": "3124433221",
+            "address": "Calle 20 # 18-22, Bogotá",
+            "birthDay": "1997-07-03",
+            "credential": [
+                {
+                    "username": "david97",
+                    "password": "millos1234567@",
+                    "role": "User"
+                }
+            ]
+        },
+        {
+            "name": "Camila Alejandra",
+            "lastName": "Pérez Córdoba",
+            "email": "camila.perez02@gmail.com",
+            "phoneNumber": "3132244668",
+            "address": "Carrera 52 # 14-05, Bucaramanga",
+            "birthDay": "2002-08-25",
+            "credential": [
+                {
+                    "username": "Camiii_",
+                    "password": "camiii1234567@"
+                }
+            ]
+        },
+        {
+            "name": "Juan",
+            "lastName": "Mejía Suárez",
+            "email": "juan.mejia96@gmail.com",
+            "phoneNumber": "3145566779",
+            "address": "Diagonal 39 # 66-18, Medellín",
+            "birthDay": "1996-01-05",
+            "credential": [
+                {
+                    "username": "JM_18",
+                    "password": "Juan1234567@"
+                }
+            ]
+        },
+        {
+            "name": "Isabella Sofía",
+            "lastName": "Vélez Cardona",
+            "email": "isabela.velez00@gmail.com",
+            "phoneNumber": "3156677889",
+            "address": "Carrera 48 # 25-33, Sabaneta",
+            "birthDay": "2000-09-19",
+            "credential": [
+                {
+                    "username": "Isaaa_00",
+                    "password": "Isabella1234567@"
+                }
+            ]
+        },
+        {
+            "name": "Mateo",
+            "lastName": "García Pineda",
+            "email": "mateo.garcia99@gmail.com",
+            "phoneNumber": "3167788990",
+            "address": "Calle 19 # 8-40, Bucaramanga",
+            "birthDay": "1999-07-03",
+            "credential": [
+                {
+                    "username": "teog7",
+                    "password": "Mateo1234567@"
+                }
+            ]
+        },
+        {
+            "name": "Daniel Andrés",
+            "lastName": "Gómez Restrepo",
+            "email": "dani.el@hotmail.com",
+            "phoneNumber": "3007654321",
+            "address": "Carrera 45 # 20-10, Bogotá",
+            "birthDay": "1998-04-15",
+            "credential": [
+                {
+                    "username": "DanielGRXD",
+                    "password": "Daniel1234567@"
+                }
+            ]
+        }
+    ]
+}

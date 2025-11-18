@@ -18,12 +18,12 @@ import { OrderDetailModule } from './orderDetail/orderDetail.module';
 import { CartModule } from './cart/cart.module';
 
 // Módulos de autenticación y usuarios
-import { AuthModule } from './auth/auth.module';
-import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';  //se soluciona cuando el módulo sea creado
+import { UserModule } from './user/user.module';  //se soluciona cuando el módulo sea creado
 import { CredentialModule } from './credential/credential.module';
 
 //Entidades usadas por la precarga
-import { User } from './entities/user.entity';
+import { User } from './entities/user.entity'; //se soluciona cuando la entidad sea creada
 import { Credential } from './entities/credential.entity';
 import { Category } from './entities/category.entity';
 
@@ -32,7 +32,7 @@ import { Category } from './entities/category.entity';
     // Configuración global
    ConfigModule.forRoot({
      isGlobal: true,
-     envFilePath: '.env.development', // Usa el mismo nombre que tu archivo
+     envFilePath: '.env.development', 
      load: [typeorm],
 }),
 
