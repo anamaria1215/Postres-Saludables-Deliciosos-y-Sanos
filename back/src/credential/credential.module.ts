@@ -9,6 +9,6 @@ import { CredentialController } from './credential.controller';
   imports: [TypeOrmModule.forFeature([Credential])],
   controllers: [CredentialController],
   providers: [CredentialService, CredentialRepository],
-  exports: [CredentialService, CredentialRepository],
+  exports: [CredentialRepository],
 })
 export class CredentialModule {}
