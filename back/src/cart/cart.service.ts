@@ -1,79 +1,48 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { CreateCartDto } from './dto/create-cart.dto';
-import { UpdateCartDto } from './dto/update-cart.dto';
-import { Cart } from '../entities/cart.entity';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Cart } from 'src/entities/cart.entity';
+import { CartRepository } from './cart.repository';
 
 @Injectable()
 export class CartService {
   constructor(
-    @InjectRepository(Cart)
-    private readonly cartRepository: Repository<Cart>,
+    private readonly cartRepository: CartRepository,
   ) {}
 
-  /**
-   * Crear un nuevo carrito
-   */
-  async create(dto: CreateCartDto): Promise<Cart> {
-    try {
-      const cart = this.cartRepository.create(dto);
-      return await this.cartRepository.save(cart);
-    } catch (error) {
-      throw new BadRequestException('Error al crear el carrito');
-    }
-  }
+  //Rutas del user
 
-  /**
-   * Listar todos los carritos
-   */
-  async findAll(): Promise<Cart[]> {
-    return await this.cartRepository.find({
-      relations: ['product'], // si existe relación con productos
-    });
-  }
-
-  /**
-   * Buscar un carrito por UUID
-   */
-  async findOne(uuid: string): Promise<Cart> {
-    const cart = await this.cartRepository.findOne({
-      where: { uuid },
-      relations: ['product'],
-    });
-
+  //Obtener el carrito activo
+  async getNewCartService(userUuid: string) {
+    //Validar que el usuario tenga un carrito activo
+    let cart = await this.cartRepository.getCartByUserIdRepository(userUuid);
+    
     if (!cart) {
-      throw new NotFoundException(`No se encontró el carrito con uuid: ${uuid}`);
+      cart = await this.cartRepository.postNewCartRepository(userUuid);
     }
-
     return cart;
   }
 
-  /**
-   * Actualizar un carrito existente
-   */
-  async update(uuid: string, dto: UpdateCartDto): Promise<Cart> {
-    const cart = await this.findOne(uuid);
-
-    Object.assign(cart, dto);
-
-    try {
-      return await this.cartRepository.save(cart);
-    } catch (error) {
-      throw new BadRequestException('Error al actualizar el carrito');
-    }
+  //Vaciar todo el carrito
+  async deleteCartService(userUuid: string) {
+    //Validar que exista el carrito
+    const cart = await this.cartRepository.getCartByUserIdRepository(userUuid);
+    if (!cart) throw new NotFoundException('Carrito no encontrado.');
+    return this.cartRepository.deleteCartRepository(cart);
   }
 
-  /**
-   * Eliminar un carrito por UUID
-   */
-  async delete(uuid: string): Promise<{ message: string }> {
-    const result = await this.cartRepository.delete({ uuid });
+  //Rutas del admin
+  
+  //Listar todos los carritos
+  async getAllCartsService() {
+    return await this.cartRepository.getAllCartsRepository();
+  }  
 
-    if (result.affected === 0) {
-      throw new NotFoundException(`No se encontró el carrito con uuid: ${uuid}`);
+  //Buscar un carrito por UUID
+  async getCartByIdService(uuid: string) {
+  const cart = await this.cartRepository.getCartByIdRepository(uuid);
+    if (!cart) {
+      throw new NotFoundException('Carrito no encontrado.')
     }
-
-    return { message: 'Carrito eliminado correctamente' };
+    return cart;
   }
 }
+
