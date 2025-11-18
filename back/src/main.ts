@@ -1,4 +1,3 @@
-// src/main.ts
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { loggerGlobal } from './middleware/loggerGlobal';
@@ -27,7 +26,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  // 🚀 Iniciar servidor
+  //Iniciar servidor
   await app.listen(3002);
   console.log('Servidor corriendo en el puerto 3002 🐱');
 }
