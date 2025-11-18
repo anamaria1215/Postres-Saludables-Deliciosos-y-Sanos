@@ -9,7 +9,7 @@ import {
   ConflictException,
   ForbiddenException,
 } from '@nestjs/common';
-import { UpdateOrderDto } from './DTOs/udapte-order.dto';
+import { UpdateOrderDto } from './DTOs/update-order.dto';
 
 describe('OrderService', () => {
   let service: OrderService;

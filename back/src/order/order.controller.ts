@@ -5,7 +5,7 @@ import { Roles } from '../decorators/roles.decorator';
 import { RolesEnum } from '../enum/roles.enum';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
-import { UpdateOrderDto } from './DTOs/udapte-order.dto';
+import { UpdateOrderDto } from './DTOs/update-order.dto';
 
 @ApiTags('Órdenes de compra') // Agrupa los endpoints
 @ApiBearerAuth()  // activa el candadito

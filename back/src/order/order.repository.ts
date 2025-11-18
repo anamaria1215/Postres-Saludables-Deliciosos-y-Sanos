@@ -2,7 +2,7 @@ import { BadRequestException, Injectable, NotFoundException } from "@nestjs/comm
 import { InjectRepository } from "@nestjs/typeorm";
 import { Order } from "src/entities/order.entity";
 import { Repository } from "typeorm";
-import { UpdateOrderDto } from "./DTOs/udapte-order.dto";
+import { UpdateOrderDto } from  "src/order/DTOs/update-order.dto";
 import { OrderStatus } from "src/enum/order-status.enum";
 import { Product } from "src/entities/product.entity";
 
