@@ -1,0 +1,125 @@
+[
+  {
+    "name": "Torta de zanahoria integral",
+    "description": "Bizcocho húmedo elaborado con harina integral, zanahoria fresca y endulzado con miel natural.",
+    "price": 25000,
+    "stock": 12,
+    "isActive": true,
+    "relations": [
+      { "category": "Tortas y pasteles" }
+    ]
+  },
+  {
+    "name": "Torta de banano y nueces",
+    "description": "Pastel suave de banano maduro con nueces tostadas y un toque de vainilla natural.",
+    "price": 27000,
+    "stock": 10,
+    "isActive": true,
+    "relations": [
+      { "category": "Tortas y pasteles" }
+    ]
+  },
+  {
+    "name": "Cheesecake ligero de frutos rojos",
+    "description": "Postre cremoso con base integral, yogurt griego y cobertura de frutos rojos frescos.",
+    "price": 30000,
+    "stock": 8,
+    "isActive": true,
+    "relations": [
+      { "category": "Postres fríos" }
+    ]
+  },
+
+  {
+    "name": "Galletas de avena con chips de cacao",
+    "description": "Crujientes galletas hechas con avena integral, cacao puro y aceite de coco.",
+    "price": 12000,
+    "stock": 25,
+    "isActive": true,
+    "relations": [
+      { "category": "Galletas y snacks" }
+    ]
+  },
+  {
+    "name": "Snack crocante de manzana",
+    "description": "Hojuelas de manzana horneada sin azúcar, perfectas para un antojo saludable.",
+    "price": 9000,
+    "stock": 30,
+    "isActive": true,
+    "relations": [
+      { "category": "Galletas y snacks" }
+    ]
+  },
+  {
+    "name": "Bolitas de proteína de maní",
+    "description": "Pequeños bocados energéticos elaborados con mantequilla de maní natural y avena.",
+    "price": 15000,
+    "stock": 20,
+    "isActive": true,
+    "relations": [
+      { "category": "Barras y bocadillos energéticos" }
+    ]
+  },
+
+  {
+    "name": "Mousse de maracuyá sin azúcar",
+    "description": "Postre frío y ligero con pulpa de maracuyá fresca y edulcorante natural.",
+    "price": 18000,
+    "stock": 15,
+    "isActive": true,
+    "relations": [
+      { "category": "Postres fríos" }
+    ]
+  },
+  {
+    "name": "Parfait de yogurt con granola integral",
+    "description": "Capas de yogurt griego, miel orgánica y granola artesanal.",
+    "price": 16000,
+    "stock": 18,
+    "isActive": true,
+    "relations": [
+      { "category": "Postres fríos" }
+    ]
+  },
+  {
+    "name": "Helado natural de frutos del bosque",
+    "description": "Helado cremoso elaborado con yogurt griego y mezcla de frutos del bosque.",
+    "price": 19000,
+    "stock": 14,
+    "isActive": true,
+    "relations": [
+      { "category": "Postres fríos" }
+    ]
+  },
+
+  {
+    "name": "Barra energética de avena y dátiles",
+    "description": "Barras suaves hechas con avena integral, dátiles y semillas de chía.",
+    "price": 7000,
+    "stock": 40,
+    "isActive": true,
+    "relations": [
+      { "category": "Barras y bocadillos energéticos" }
+    ]
+  },
+  {
+    "name": "Bocadito energético de coco y almendra",
+    "description": "Pequeños cubos de energía elaborados con coco rallado y almendras naturales.",
+    "price": 8000,
+    "stock": 35,
+    "isActive": true,
+    "relations": [
+      { "category": "Barras y bocadillos energéticos" }
+    ]
+  },
+  {
+    "name": "Barra crocante de maní y cacao",
+    "description": "Perfecta mezcla de maní tostado, cacao puro y miel artesanal.",
+    "price": 7500,
+    "stock": 28,
+    "isActive": true,
+    "relations": [
+      { "category": "Barras y bocadillos energéticos" }
+    ]
+  }
+]

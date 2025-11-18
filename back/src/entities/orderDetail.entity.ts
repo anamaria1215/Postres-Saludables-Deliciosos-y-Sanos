@@ -1,24 +1,39 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { Order } from '../entities/order.entity';
 import { Product } from '../entities/product.entity';
 
 @Entity()
 export class OrderDetail {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  uuid: string;
 
-  @ManyToOne(() => Order, order => order.orderDetails)
+  @Column({
+    type: 'int',
+    nullable: false,
+  })
+  quantity: number; //Cantidad de un producto en la orden
+
+  @Column({
+    type: 'decimal',
+    precision: 10,
+    scale: 2,
+    nullable: false,
+  })
+  unitPrice: number; //Precio unitario del producto al momento de la compra
+
+  @Column({
+    type: 'decimal',
+    precision: 10,
+    scale: 2,
+    nullable: false,
+  })
+  subtotal: number; //Subtotal = quantity * unitPrice
+
+  @ManyToOne(() => Order, (order) => order.orderDetails)
+  @JoinColumn({ name: 'order_uuid' })
   order: Order;
 
-  @ManyToOne(() => Product)
+  @ManyToOne(() => Product, (product) => product.orderDetails)
+  @JoinColumn({ name: 'product_uuid' })
   product: Product;
-
-  @Column({ type: 'int' })
-  quantity: number;
-
-  @Column({ type: 'decimal', precision: 10, scale: 2 })
-  unitPrice: number;
-
-  @Column({ type: 'decimal', precision: 10, scale: 2 })
-  subtotal: number;
 }

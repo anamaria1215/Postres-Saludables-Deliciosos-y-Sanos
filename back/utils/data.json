@@ -12,15 +12,15 @@
                     "username": "ana_7",
                     "password": "Ana123456@",
                     "role": "Admin"
-            }
-        ]
+                }
+            ]
         },
         {
             "name": "Angie Tatiana",
             "lastName": "Alba Amado",
             "email": "angie.alba@gmail.com",
             "phoneNumber": "3009876543",
-            "address": "Carrera 42 # 15-28, Bogotá",
+            "address": "Carrera 42 # 15-28",
             "birthDay": "1997-05-22",
             "credential": [
                 {
@@ -35,7 +35,7 @@
             "lastName": "Rueda Peña",
             "email": "norida.rueda@gmail.com",
             "phoneNumber": "3129988775",
-            "address": "Calle 60 # 33-12, Bucaramanga",
+            "address": "Calle 60 # 33-12",
             "birthDay": "1989-10-09",
             "credential": [
                 {
@@ -50,7 +50,7 @@
             "lastName": "López Bedoya",
             "email": "monica.lopezb@gmail.com",
             "phoneNumber": "3105566778",
-            "address": "Transversal 25 # 45-33, Medellín",
+            "address": "Transversal 25 # 45-33",
             "birthDay": "1995-03-18",
             "credential": [
                 {
@@ -65,7 +65,7 @@
             "lastName": "Duarte Calderón",
             "email": "anellis.duarte@gmail.com",
             "phoneNumber": "3012233445",
-            "address": "Carrera 10 # 22-56, Cali",
+            "address": "Carrera 10 # 22-56",
             "birthDay": "1998-12-07",
             "credential": [
                 {
@@ -83,7 +83,7 @@
             "lastName": "Suárez Tobón",
             "email": "rsuarez@gmail.com",
             "phoneNumber": "3000123487",
-            "address": "Carrera 45 # 20-10, Envigado",
+            "address": "Carrera 45 # 20-10",
             "birthDay": "1994-09-12",
             "credential": [
                 {
@@ -97,7 +97,7 @@
             "lastName": "Castaño Rojas",
             "email": "laura.castano99@gmail.com",
             "phoneNumber": "3021122334",
-            "address": "Calle 50 # 72-11, Bello",
+            "address": "Calle 50 # 72-11",
             "birthDay": "1999-11-09",
             "credential": [
                 {
@@ -111,7 +111,7 @@
             "lastName": "Ramírez González",
             "email": "felipe.ramirez95@hotmail.com",
             "phoneNumber": "3045566778",
-            "address": "Carrera 60 # 33-80, Bogotá",
+            "address": "Carrera 60 # 33-80",
             "birthDay": "1995-12-02",
             "credential": [
                 {
@@ -125,7 +125,7 @@
             "lastName": "Zapata Montoya",
             "email": "valentina.zm01@gmail.com",
             "phoneNumber": "3119988776",
-            "address": "Transversal 32 # 45-19, Itagüí",
+            "address": "Transversal 32 # 45-19",
             "birthDay": "2001-12-12",
             "credential": [
                 {
@@ -139,7 +139,7 @@
             "lastName": "Jiménez Arango",
             "email": "santiago.ja97@gmail.com",
             "phoneNumber": "3124433221",
-            "address": "Calle 20 # 18-22, Bogotá",
+            "address": "Calle 20 # 18-22",
             "birthDay": "1997-07-03",
             "credential": [
                 {
@@ -154,7 +154,7 @@
             "lastName": "Pérez Córdoba",
             "email": "camila.perez02@gmail.com",
             "phoneNumber": "3132244668",
-            "address": "Carrera 52 # 14-05, Bucaramanga",
+            "address": "Carrera 52 # 14-05",
             "birthDay": "2002-08-25",
             "credential": [
                 {
@@ -168,7 +168,7 @@
             "lastName": "Mejía Suárez",
             "email": "juan.mejia96@gmail.com",
             "phoneNumber": "3145566779",
-            "address": "Diagonal 39 # 66-18, Medellín",
+            "address": "Diagonal 39 # 66-18",
             "birthDay": "1996-01-05",
             "credential": [
                 {
@@ -182,7 +182,7 @@
             "lastName": "Vélez Cardona",
             "email": "isabela.velez00@gmail.com",
             "phoneNumber": "3156677889",
-            "address": "Carrera 48 # 25-33, Sabaneta",
+            "address": "Carrera 48 # 25-33",
             "birthDay": "2000-09-19",
             "credential": [
                 {
@@ -196,7 +196,7 @@
             "lastName": "García Pineda",
             "email": "mateo.garcia99@gmail.com",
             "phoneNumber": "3167788990",
-            "address": "Calle 19 # 8-40, Bucaramanga",
+            "address": "Calle 19 # 8-40",
             "birthDay": "1999-07-03",
             "credential": [
                 {
@@ -210,7 +210,7 @@
             "lastName": "Gómez Restrepo",
             "email": "dani.el@hotmail.com",
             "phoneNumber": "3007654321",
-            "address": "Carrera 45 # 20-10, Bogotá",
+            "address": "Carrera 45 # 20-10",
             "birthDay": "1998-04-15",
             "credential": [
                 {

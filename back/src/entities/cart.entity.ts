@@ -1,17 +1,17 @@
+
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
-
   ManyToOne,
   OneToMany,
-  OneToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
-//import { User } from './users.entity';
-import { Product } from './product.entity';
-import { join } from 'path';
-import { CartDetail } from './cart_detail.entity';
+import { User } from './user.entity';
+import { CartStatus } from 'src/enum/cart-status.enum';
+import { CartDetail } from './cartDetail.entity';
 
 @Entity({ name: 'cart' })
 export class Cart {
@@ -19,45 +19,41 @@ export class Cart {
   uuid: string;
 
   @Column({
-    type: 'varchar',
-    length: 100,
+    type: 'decimal',
+    precision: 10,
+    scale: 2,
     nullable: false,
+    default: 0,
   })
-  addressDelivery: string;
+  subtotal: number; //Suma de los subtotales de los detalles del carrito
 
   @Column({
-    type: 'timestamp',
+    type: 'enum',
+    enum: CartStatus,
+    nullable: false,
+    default: CartStatus.ACTIVO, //Cuando se crea un carrito, su estado es 'Activo'
+  })
+  status: CartStatus;
+
+  @CreateDateColumn({
+    type: 'timestamp',  
     default: () => 'CURRENT_TIMESTAMP',
   })
-  dateCreated: Date;
+  createdAt: Date;
 
-  @Column({
-    type: 'timestamp',
-    nullable: true,
+  @UpdateDateColumn({
+    type: 'timestamp',  
+    default: () => 'CURRENT_TIMESTAMP',
+    onUpdate: 'CURRENT_TIMESTAMP',
   })
-  deliveryDate: Date;
+  updatedAt: Date; 
 
-   @Column({
-    type: 'boolean',
-    default: true,
-  })
-  isActive: boolean;
+ //Relación con usuario (muchos carritos pueden pertenecer a un usuario)
+  @ManyToOne(() => User, (user) => user.carts)
+  @JoinColumn({ name: 'user_uuid' })
+  user: User;
 
-  @Column({
-        type: 'decimal',
-        precision: 10,
-        scale: 2,
-        nullable: false,
-    })
-    total: number;
-
-  //Relación con usuario (Un Usuario puede tener un carrito activo)
-  //@OneToOne(() => User, (user) => user.cart)
- // @JoinColumn({ name: 'user_id' })
-  //user: User;
-
-  // Relación con Detalle de Carrito (Un carrito puede tener muchos detalles)
-  @OneToMany(() => CartDetail, (cart_detail) => cart_detail.cart)
-  @JoinColumn({ name: 'cart_detail_id' })
-  cart_detail: CartDetail[];
+  //Lado inverso: relación con cart_detail -> 1:N, un carrito tiene muchos detalles de carrito
+  @OneToMany(() => CartDetail, (cartDetail) => cartDetail.cart)  
+  cartDetail: CartDetail[];  
 }

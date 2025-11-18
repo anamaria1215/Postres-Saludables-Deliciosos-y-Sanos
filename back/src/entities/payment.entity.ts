@@ -28,7 +28,7 @@ export class Payment {
         type: 'enum',
         enum: PaymentStatus,
         nullable: false,
-        default: PaymentStatus.CONFIRMADO, //Admin registra pagos confirmados
+        default: PaymentStatus.PENDIENTE, //Los pagos se crean como 'Pendientes', el admin los confirma
     })
     status: PaymentStatus;
 
@@ -47,6 +47,6 @@ export class Payment {
 
     //Aquí va la FK: relación con order -> 1:1, un pago pertenece solo a una orden de compra
     @OneToOne(() => Order, (order) => order.payment)
-    @JoinColumn({ name: 'order_uuid' }) //Nombre de la columna en la base de datos
+    @JoinColumn({ name: 'order_uuid' })
     order: Order;
 }
