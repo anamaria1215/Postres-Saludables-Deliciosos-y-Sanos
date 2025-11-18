@@ -1,113 +1,78 @@
 import {
   Controller,
   Get,
-  Post,
-  Patch,
   Delete,
   Param,
-  Body,
+  HttpCode,
+  HttpStatus,
+  UseGuards,
+  Req,
+  ParseUUIDPipe,
 } from '@nestjs/common';
-import { CartService } from './cart.service';
-import { CreateCartDto } from './dto/create-cart.dto';
-import { UpdateCartDto } from './dto/update-cart.dto';
-import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiParam } from '@nestjs/swagger';
 
-@ApiTags('Cart') // Agrupa las rutas en Swagger
+import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { Roles } from 'src/decorators/roles.decorator';
+import { RolesEnum } from 'src/enum/roles.enum';
+import { CartService } from './cart.service';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+
+@ApiTags('Carrito') // Agrupa las rutas en Swagger
+@ApiBearerAuth()
 @Controller('cart')
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class CartController {
   constructor(private readonly cartService: CartService) {}
 
-  /**
-   * Listar todos los carritos
+  //Rutas del user
 
-   */
-  @Get()
-  // @ApiBearerAuth() // Muestra el candado de autenticación JWT en Swagger
-//    @UseGuards(JwtAuthGuard, RolesGuard)
-   // @Roles(RolesEnum.ADMIN)
-  @ApiOperation({ summary: 'Obtener todos los carritos' })
+  //Obtener el carrito activo (si no existe, lo crea automáticamente)
+  @Get('get')
+  @ApiOperation({ summary: 'Obtener carrito activo | USER.', description: 'Permite obtener el carrito activo del usuario, si no tiene uno, se crea automáticamente con este estado.' })
+  @ApiResponse({ status: 200, description: 'Carrito obtenido exitosamente.' })
+  @HttpCode(HttpStatus.OK)
+  @Roles(RolesEnum.USER)
+  getNewCart(@Req() req){
+    const userUuid = req.user.user_uuid; //Viene del JWT
+    return this.cartService.getNewCartService(userUuid);
+  } 
+
+  //Vaciar todo el carrito
+  @Delete('empty')
+  @ApiOperation({ summary: 'Vaciar el carrito activo | USER.', description: 'Permite vaciar el carrito activo del usuario.' })
+  @ApiResponse({ status: 200, description: 'Carrito vaciado exitosamente.' })
+  @HttpCode(HttpStatus.OK)
+  @Roles(RolesEnum.USER)
+  deleteCart(@Req() req){
+    const userUuid = req.user.user_uuid;
+    return this.cartService.deleteCartService(userUuid);
+  } 
+
+  //Rutas del admin
+
+  //Listar todos los carritos
+  @Get('all')
+  @ApiOperation({ summary: 'Obtener todos los carritos | ADMIN', description: 'Permite al administrador obtener una lista de todos los carritos existentes en el sistema.' })
   @ApiResponse({ status: 200, description: 'Lista de carritos obtenida con éxito.' })
-  findAll() {
-    return this.cartService.findAll();
+  @HttpCode(HttpStatus.OK)
+  @Roles(RolesEnum.ADMIN)
+  getAllCarts() {
+    return this.cartService.getAllCartsService();
   }
 
-  /**
-   * Obtener un carrito por UUID
-
-   */
+  //Obtener un carrito por UUID
   @Get(':uuid')
-  // @ApiBearerAuth() // Muestra el candado de autenticación JWT en Swagger
-//    @UseGuards(JwtAuthGuard, RolesGuard)
-   // @Roles(RolesEnum.ADMIN)
-  @ApiOperation({ summary: 'Obtener un carrito por UUID' })
-  @ApiResponse({ status: 200, description: 'Carrito encontrado.' })
-  @ApiResponse({ status: 404, description: 'Carrito no encontrado.' })
-  findOne(@Param('uuid') uuid: string) {
-    return this.cartService.findOne(uuid);
-  }
-
-  /**
-   * Crear un nuevo carrito
-   * Ruta pública (accesible por usuarios)
-   */
-  @Post()
-  @ApiOperation({ summary: 'Crear un nuevo carrito' })
-  @ApiBody({
-    description: 'Datos requeridos para crear un carrito',
-    type: CreateCartDto,
-    examples: {
-      ejemplo: {
-        summary: 'Ejemplo de carrito',
-        value: {
-          addressDelivery: 'Calle 45 #10-22, Bogotá',
-          dateCreated: '11/11/2025',
-          deliveryDate: '13/11/2025',
-          total: 85000,
-          productUuid: '550e8400-e29b-41d4-a716-446655440000',
-        },
-      },
-    },
+  @ApiOperation({ summary: 'Obtener un carrito por su Id | ADMIN', description: 'Permite al administrador obtener los detalles de un carrito específico utilizando su UUID.' })
+  @ApiParam({
+    name: 'uuid',
+    type: 'string',
+    description: 'UUID del carrito a consultar.',
+    example: 'c31a34b7-8b9a-4e71-a29a-8c26f675a1c8'
   })
-  @ApiResponse({ status: 201, description: 'Carrito creado con éxito.' })
-  @ApiResponse({ status: 400, description: 'Error al crear el carrito.' })
-  create(@Body() dto: CreateCartDto) {
-    return this.cartService.create(dto);
-  }
-
-  /**
-   * Actualizar un carrito existente
-   * Ruta pública (ej. actualizar dirección o fecha antes de enviar)
-   */
-  @Patch(':uuid')
-  @ApiOperation({ summary: 'Actualizar un carrito existente' })
-  @ApiBody({
-    description: 'Campos opcionales a actualizar',
-    type: UpdateCartDto,
-    examples: {
-      ejemplo: {
-        summary: 'Ejemplo de actualización',
-        value: {
-          addressDelivery: 'Carrera 12 #5-60, Medellín',
-          deliveryDate: '14/11/2025',
-        },
-      },
-    },
-  })
-  @ApiResponse({ status: 200, description: 'Carrito actualizado con éxito.' })
-  @ApiResponse({ status: 404, description: 'Carrito no encontrado.' })
-  update(@Param('uuid') uuid: string, @Body() dto: UpdateCartDto) {
-    return this.cartService.update(uuid, dto);
-  }
-
-  /**
-   * Eliminar un carrito
-   * Ruta pública (por si el usuario desea cancelar la compra)
-   */
-  @Delete(':uuid')
-  @ApiOperation({ summary: 'Eliminar un carrito existente' })
-  @ApiResponse({ status: 200, description: 'Carrito eliminado correctamente.' })
-  @ApiResponse({ status: 404, description: 'Carrito no encontrado.' })
-  delete(@Param('uuid') uuid: string) {
-    return this.cartService.delete(uuid);
+  @ApiResponse({ status: 200, description: 'Carrito encontrado y retornado correctamanete.' })
+  @HttpCode(HttpStatus.OK)
+  @Roles(RolesEnum.ADMIN)
+  getCartById(@Param('uuid', ParseUUIDPipe) uuid: string) {
+    return this.cartService.getCartByIdService(uuid);
   }
 }
