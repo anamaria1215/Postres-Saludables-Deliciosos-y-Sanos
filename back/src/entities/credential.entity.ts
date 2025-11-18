@@ -1,9 +1,8 @@
-
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { User } from './user.entity';
 import { RolesEnum } from '../enum/roles.enum';
 
-@Entity({ name: 'Credential' })
+@Entity({ name: 'credential' })
 export class Credential {
   @PrimaryGeneratedColumn('uuid')
   uuid: string;
@@ -26,13 +25,26 @@ export class Credential {
   @Column({
     type: 'enum',
     enum: RolesEnum,
-    default: RolesEnum.ADMIN,
+    default: RolesEnum.USER,
   })
   role: RolesEnum;
 
   @Column({ default: true })
-  active: boolean;
+  isActive: boolean;
 
-  @OneToOne(() => User, (user) => user.credential, { onDelete: 'CASCADE' })
+  @CreateDateColumn ({
+      type: 'timestamp',  
+      default: () => 'CURRENT_TIMESTAMP'
+  })
+  createdAt: Date;
+
+  @UpdateDateColumn({
+      type: 'timestamp',  
+      default: () => 'CURRENT_TIMESTAMP',
+      onUpdate: 'CURRENT_TIMESTAMP',
+  })
+  updatedAt: Date;
+
+  @OneToOne(() => User, (user) => user.credential)
   user: User;
 }
