@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { Credential } from './entities/credential.entity';
 import { Category } from './entities/category.entity';
+import { Product } from './entities/product.entity';
 import * as path from 'path';
 import * as fs from 'fs';
 import * as bcrypt from 'bcrypt';
@@ -18,7 +19,7 @@ export class AppService {
   }
 }
 
-//Precarga de usuarios y categorias
+//Precarga de usuarios, categorias y productos
 //Se cargan automáticamente al levantar el back 
 
 @Injectable()
@@ -28,10 +29,14 @@ export class InitialDataLoader implements OnModuleInit {
     private readonly credentialDBRepo: Repository<Credential>,
 
     @InjectRepository(User)
-    private readonly userProfileDBRepo: Repository<User>,
+    private readonly userDBRepo: Repository<User>,
 
     @InjectRepository(Category)
     private readonly categoryDBRepo: Repository<Category>,
+
+    @InjectRepository(Product)
+    private readonly productDBRepo: Repository<Product>,
+
   ) {}
 
   async onModuleInit() {
@@ -40,7 +45,7 @@ export class InitialDataLoader implements OnModuleInit {
     if (count === 0) {
       await this.loaderData();
     } else {
-      console.log('Ya existen datos iniciales precargados en la base de datos de Fur-ever.');
+      console.log('Ya existen datos iniciales precargados en la base de datos.');
     }
   }
 
@@ -53,6 +58,10 @@ export class InitialDataLoader implements OnModuleInit {
    
     const credsUsersData = JSON.parse(fs.readFileSync(credsUsersPath, 'utf-8'));
     const catsData = JSON.parse(fs.readFileSync(catsPath,'utf-8'));
+
+    const productsPath = path.resolve(__dirname, '..', 'utils', 'products.json');
+    const productsData = JSON.parse(fs.readFileSync(productsPath, 'utf-8'));
+
   
     //Conteo de datos leídos para console.logs
 
@@ -60,12 +69,16 @@ export class InitialDataLoader implements OnModuleInit {
     const totalUsers = credsUsersData.users ? credsUsersData.users.length : 0;
     const totalFinalUsers = totalAdmins + totalUsers;
     const totalCategories = catsData.length;
+    const totalProducts = productsData.length;
+
 
     console.log('Datos leídos en los archivos JSON:');
     console.log(`Total admins: ${totalAdmins}`);
     console.log(`Total usuarios: ${totalUsers}`);
     console.log(`Total general de usuarios: ${totalFinalUsers}`);
     console.log(`Total categorías: ${totalCategories}`);
+    console.log(`Total productos: ${totalProducts}`);
+
 
     //Precarga de usuarios y sus credenciales. 5 admin y 10 usuarios 
     const queryRunnerUsers = this.credentialDBRepo.manager.connection.createQueryRunner();
@@ -96,13 +109,12 @@ export class InitialDataLoader implements OnModuleInit {
             await queryRunnerUsers.manager.save(newCredential);
             console.log(`Credencial creada para el usuario: ${credential.username}.`);
 
-            const newUser = this.userProfileDBRepo.create({
+            const newUser = this.userDBRepo.create({
               name: user.name,
               lastName: user.lastName,
               email: user.email,
               phoneNumber: user.phoneNumber,
               address: user.address,
-              birthDay: new Date(user.birthDay),
               credential: newCredential,
             });
             await queryRunnerUsers.manager.save(newUser);
@@ -156,6 +168,75 @@ export class InitialDataLoader implements OnModuleInit {
     } finally {
       await queryRunnerCats.release();
     }
+
+    // Precarga de productos
+    const queryRunnerProducts = this.productDBRepo.manager.connection.createQueryRunner();
+    await queryRunnerProducts.connect();
+    await queryRunnerProducts.startTransaction();
+
+    try {
+      console.log('Precargando productos...');
+
+      await Promise.all(
+        productsData.map(async (product) => {
+          // Verificar si ya existe un producto con ese nombre
+          const productExists = await this.productDBRepo.findOne({
+            where: { name: product.name },
+          });
+
+          if (!productExists) {
+
+            // Tomar categoría desde product.relations[0].category
+            let category: Category | null = null;
+
+            if (product.relations && product.relations.length > 0) {
+              const categoryName = product.relations[0].category;
+
+              category = await this.categoryDBRepo.findOne({
+                where: { name: categoryName },
+              });
+
+              if (!category) {
+                console.warn(
+                  `No se encontró la categoría "${categoryName}" para el producto ${product.name}.`
+                );
+                return; 
+              }
+            } else {
+              console.warn(
+                `El producto ${product.name} no tiene la propiedad relations definida.`
+              );
+              return;
+            }
+
+            const newProduct = this.productDBRepo.create({
+              name: product.name,
+              description: product.description,
+              price: product.price,
+              stock: product.stock,
+              isActive: product.isActive,
+              category: category,
+            });
+
+            await queryRunnerProducts.manager.save(newProduct);
+            console.log(`Producto creado: ${product.name} en la categoria: ${newProduct.category.name}`);
+          } else {
+            console.log(`El producto ${product.name} ya existe.`);
+          }
+        })
+      );
+
+      await queryRunnerProducts.commitTransaction();
+      console.log('Productos precargados correctamente. Total:', totalProducts);
+
+    } catch (error) {
+      console.error('Error al precargar productos. Revirtiendo cambios...');
+      await queryRunnerProducts.rollbackTransaction();
+      console.error(error);
+    } finally {
+      await queryRunnerProducts.release();
+    }
+
 
     console.log('Precarga de datos completada exitosamente.');
   }
