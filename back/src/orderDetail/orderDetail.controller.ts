@@ -1,35 +1,60 @@
-import { Controller, Post, Patch, Param, Body, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Controller, Param, UseGuards, Get, HttpCode, HttpStatus, ParseUUIDPipe, Req } from '@nestjs/common';
+import { ApiBearerAuth, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { OrderDetailService } from './orderDetail.service';
-import { OrderDetail } from '../entities/orderDetail.entity';
-import { CreateOrderDetailDto } from './DTOs/create-orderDetail.dto';
-import { UpdateOrderDetailDto } from './DTOs/update-orderDetail.dto';
-import { JwtAuthGuard } from 'src/guards/jwt.auth.guard';
-import { RolesGuard } from '../guards/roles.guard';
 import { Roles } from '../decorators/roles.decorator';
 import { RolesEnum } from '../enum/roles.enum';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
 
-@ApiTags('OrderDetail')
+@ApiTags('Detalles de la orden')
 @ApiBearerAuth()
 @Controller('order-details')
 export class OrderDetailController {
   constructor(private readonly orderDetailService: OrderDetailService) {}
 
-  @Post()
-  @ApiOperation({ summary: 'Crear un nuevo detalle de orden (solo Usuario autenticado)' })
-  @ApiResponse({ status: 201, description: 'Detalle de orden creado exitosamente.' })
-  @UseGuards(JwtAuthGuard)
-  @Roles(RolesEnum.ADMIN)
-  async create(@Body() dto: CreateOrderDetailDto): Promise<OrderDetail> {
-    return this.orderDetailService.create(dto);
-  }
+  //Rutas del admin
 
-  @Patch(':id')
-  @ApiOperation({ summary: 'Actualizar detalle de orden (solo Admin)' })
-  @ApiResponse({ status: 200, description: 'Detalle de orden actualizado correctamente.' })
+  //Ver todos los detalles que componen una orden por su UUID (lectura)
+  @Get('admin/:uuid')
+  @ApiOperation({ summary: 'Ver todos los detalles de una orden | ADMIN.', description: 'Permite obtener todos los detalles que componen cualquier orden.' })
+  @ApiParam({
+    name: 'uuid',
+    type: 'string',
+    description: 'UUID de la orden a consultar.',
+    example: 'c31a34b7-8b9a-4e71-a29a-8c26f675a1c8'
+  })
+  @ApiResponse({ status: 200, description: 'Lista de detalles de la orden obtenida correctamente.' })
+  @HttpCode(HttpStatus.OK)
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(RolesEnum.ADMIN)
-  async update(@Param('id') id: string, @Body() dto: UpdateOrderDetailDto): Promise<OrderDetail> {
-    return this.orderDetailService.update(id, dto);
+  getOrderDetailsAdmin(
+    @Param('uuid', ParseUUIDPipe) uuid: string //El UUID de la orden
+  ){
+    return this.orderDetailService.getOrderDetailsAdminService(uuid);
+  }
+
+  //Rutas del user
+
+  //Ver todos los detalles que componen una orden por su UUID (lectura)
+  @Get('user/:uuid')
+  @ApiOperation({ summary: 'Ver todos los detalles de una orden | USER.', description: 'Permite obtener todos los detalles de una orden propia.' })
+  @ApiParam({
+    name: 'uuid',
+    type: 'string',
+    description: 'UUID de la orden a consultar.',
+    example: 'c31a34b7-8b9a-4e71-a29a-8c26f675a1c8'
+  })
+  @ApiResponse({ status: 200, description: 'Lista de detalles de la orden obtenida correctamente.' })
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(RolesEnum.USER)
+  getOrderDetailUser(
+    @Req() req,
+    @Param('uuid', ParseUUIDPipe) uuid: string //El UUID de la orden
+  ){
+    return this.orderDetailService.getOrderDetailsUserService(
+      req, 
+      uuid
+    );
   }
 }
