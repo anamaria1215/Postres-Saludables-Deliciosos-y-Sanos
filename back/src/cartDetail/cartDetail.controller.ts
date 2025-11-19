@@ -16,9 +16,10 @@ import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { Roles } from 'src/decorators/roles.decorator';
 import { RolesEnum } from 'src/enum/roles.enum';
 import { AddProductDto } from './DTOs/add-product.dto';
-import { UpdateProductQuantityDto } from './DTOs/update-detail.dto';
+
 import { CartDetailService } from './cartDetail.service';
 import { ApiBearerAuth, ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { UpdateProductQuantityDto } from './DTOs/update-cartdetail.dto';
 
 @ApiTags('Detalles del carrito') // Agrupa las rutas en Swagger
 @ApiBearerAuth()

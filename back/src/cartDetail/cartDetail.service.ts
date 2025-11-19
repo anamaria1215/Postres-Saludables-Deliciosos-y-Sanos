@@ -1,9 +1,9 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { AddProductDto } from './DTOs/add-product.dto';
-import { UpdateProductQuantityDto } from './DTOs/update-detail.dto';
 import { CartRepository } from 'src/cart/cart.repository';
 import { ProductsRepository } from 'src/products/products.repository';
 import { CartDetailRepository } from './cartDetail.repository';
+import { UpdateProductQuantityDto } from './DTOs/update-cartdetail.dto';
 
 @Injectable()
 export class CartDetailService {

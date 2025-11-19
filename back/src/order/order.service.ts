@@ -3,8 +3,9 @@ import { Order } from '../entities/order.entity';
 import { OrderRepository } from './order.repository';
 import { CartRepository } from 'src/cart/cart.repository';
 import { OrderDetailRepository } from 'src/orderDetail/orderDetail.repository';
-import { UpdateOrderDto } from './DTOs/udapte-order.dto';
+
 import { OrderDetail } from 'src/entities/orderDetail.entity';
+import { UpdateOrderDto } from './DTOs/update-order.dto';
 
 @Injectable()
 export class OrderService {
