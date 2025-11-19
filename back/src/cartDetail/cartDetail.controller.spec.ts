@@ -3,11 +3,12 @@ import { CartDetailController } from './cartDetail.controller';
 import { CartDetailService } from './cartDetail.service';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { AddProductDto } from './DTOs/add-product.dto';
+
 import { CartDetail } from '../entities/cartDetail.entity';
 import { Cart } from '../entities/cart.entity';
 import { Product } from '../entities/product.entity';
-import { AddProductDto } from './dto/add-product.dto';
-import { UpdateProductQuantityDto } from './dto/update-cartdetail.dto';
+import { UpdateProductQuantityDto } from './DTOs/update-cartdetail.dto';
 
 // Helper para crear un CartDetail mock completo
 const mockCartDetail = (overrides?: Partial<CartDetail>): CartDetail => ({

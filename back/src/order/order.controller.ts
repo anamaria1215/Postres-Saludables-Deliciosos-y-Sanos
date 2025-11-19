@@ -7,6 +7,7 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { UpdateOrderDto } from './DTOs/update-order.dto';
 
+
 @ApiTags('Órdenes de compra') // Agrupa los endpoints
 @ApiBearerAuth()  // activa el candadito
 @Controller('orders')

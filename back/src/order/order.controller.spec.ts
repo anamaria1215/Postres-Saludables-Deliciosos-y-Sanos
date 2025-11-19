@@ -1,9 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { OrderController } from './order.controller';
 import { OrderService } from './order.service';
-import { UpdateOrderDto } from './DTOs/update-order.dto';
+
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { UpdateOrderDto } from './DTOs/update-order.dto';
 
 describe('OrderController', () => {
     let controller: OrderController;

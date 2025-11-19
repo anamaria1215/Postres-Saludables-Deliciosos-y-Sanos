@@ -16,7 +16,7 @@ import { CategoriesModule } from './categories/categories.module';
 import { OrderModule } from './order/order.module';
 import { OrderDetailModule } from './orderDetail/orderDetail.module';
 import { CartModule } from './cart/cart.module';
-import { CartDetailModule } from 'src/cart_detail/cartDetail.module';
+import { CartDetailModule } from './cartDetail/cartDetail.module';
 
 // Módulos de autenticación y usuarios
 import { AuthModule } from './auth/auth.module';

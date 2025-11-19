@@ -6,9 +6,8 @@ import { OrderController } from './order.controller';
 import { OrderRepository } from './order.repository';
 import { UserModule } from 'src/user/user.module';
 import { CartModule } from 'src/cart/cart.module';
-import { CartDetailModule } from 'src/cart_detail/cartDetail.module';
+import { CartDetailModule } from 'src/cartDetail/cartDetail.module';
 import { OrderDetailModule } from 'src/orderDetail/orderDetail.module';
-import { Product } from 'src/entities/product.entity';
 
 @Module({
   imports: [
