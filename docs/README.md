@@ -216,7 +216,7 @@ Todas las rutas requieren autenticación con **JWT** y rol específico (**USER**
 **1. Clonar el repositorio**
 
 ```bash
-git clone https://github.com/anamaria1215/Postres-Saludables-Delicioso-y-Sano.git
+git clone https://github.com/anamaria1215/Postres-Saludables-Deliciosos-y-Sanos.git
 ```
 
 **2. Instalar dependencias**
@@ -286,7 +286,7 @@ JWT_EXPIRES_IN=
 
 La API está desplegada en **Render** y disponible en el siguiente enlace:
 
-🔗 https://nombre-del-servicio.onrender.com --> AQUI VA NUESTRO LINK
+🔗 https://postres-deliciosos-y-sanos.onrender.com/api
 
 ---
 
@@ -351,13 +351,14 @@ Todos los casos de prueba se ejecutaron correctamente, confirmando el funcionami
 
 ## Equipo de Desarrollo
 
-**Grupo 1 – Mujeres Digitales 2025**
+| Integrante                         | Rol                                                             |
+| ---------------------------------- | --------------------------------------------------------------- |
+| **Ana María Vargas Mejía**         | **Lead Backend Developer / DevOps**                             |
+| **Mónica López Bedoya**            | **Backend Developer / QA Engineer**                             |
+| **Angie Tatiana Alba Amado**       | **Junior Backend Developer / Business Research & Presentation** |
+| **Anellis Nicols Duarte Calderón** | **Junior Backend Developer / Business Research & Presentation** |
+| **Norida Elena Rueda Peña**        | **Junior Backend Developer / Business Research & Presentation** |
 
-* Ana María Vargas Mejía 
-* Angie Tatiana Alba Amado
-* Norida Elena Rueda Peña
-* Mónica López Bedoya
-* Anellis Nicols Duarte Calderón
 
 ---
 
