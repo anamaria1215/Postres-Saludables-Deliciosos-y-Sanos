@@ -205,7 +205,7 @@ Todas las rutas requieren autenticación con **JWT** y rol específico (**USER**
 * **JWT & Bcrypt** – Autenticación y seguridad
 * **Swagger** – Documentación de la API
 * **Jest** – Pruebas unitarias
-* **Render / Railway** – Despliegue del proyecto
+* **Render** – Despliegue del proyecto
 
 ---
 
